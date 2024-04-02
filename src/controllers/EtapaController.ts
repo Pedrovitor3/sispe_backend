@@ -73,7 +73,6 @@ class EtapaController {
 
     const resourceEtapaRepository = APPDataSource.getRepository(Etapa);
 
-
     const etapaFull = await resourceEtapaRepository.findOne({
       where: {id:id},
     });
@@ -109,7 +108,6 @@ class EtapaController {
     if (!deleteResponse.affected) {
       return response.status(400).json({status: "cartão não excluido!"});
     }
-
     return response.json(etapaToRemove);
   }
 

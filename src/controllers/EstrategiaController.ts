@@ -67,7 +67,6 @@ class EstrategiaController {
 
     const resourceEstrategiaRepository = APPDataSource.getRepository(Estrategia);
 
-
     const estrategiaFull = await resourceEstrategiaRepository.findOne({
       where: {id:id},
     });
@@ -125,7 +124,6 @@ class EstrategiaController {
     const token = jwt.sign({ id }, process.env.SECRET, {
       expiresIn: 43200,
     });
-
     return response.json({ auth: true, token });
   }
 }

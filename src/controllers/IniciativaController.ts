@@ -76,7 +76,6 @@ class IniciativaController {
 
     const resourceIniciativaRepository = APPDataSource.getRepository(Iniciativa);
 
-
     const iniciativaFull = await resourceIniciativaRepository.findOne({
       where: {id:id},
     });
@@ -96,7 +95,6 @@ class IniciativaController {
       status,
       estrategia,
     });
-
     return response.status(200).json(iniciativa);
   }
 
@@ -108,7 +106,7 @@ class IniciativaController {
     if (!iniciativaToRemove) {
       return response.status(400).json({status: "cartão não encontrado!"});
     }
-      
+  
     const deleteResponse = await resourceIniciativaRepository.softDelete(iniciativaToRemove.id);
     if (!deleteResponse.affected) {
       return response.status(400).json({status: "cartão não excluido!"});

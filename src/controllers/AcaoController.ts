@@ -154,7 +154,6 @@ class AcaoController {
     if (!deleteResponse.affected) {
       return response.status(400).json({status: "cartão não excluido!"});
     }
-
     return response.json(acaoToRemove);
   }
 
