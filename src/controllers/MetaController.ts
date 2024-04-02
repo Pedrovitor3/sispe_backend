@@ -67,7 +67,6 @@ class MetaController {
 
     const resourceMetaRepository = APPDataSource.getRepository(Meta);
 
-
     const metaFull = await resourceMetaRepository.findOne({
       where: {id:id},
     });
@@ -125,7 +124,6 @@ class MetaController {
     const token = jwt.sign({ id }, process.env.SECRET, {
       expiresIn: 43200,
     });
-
     return response.json({ auth: true, token });
   }
 }

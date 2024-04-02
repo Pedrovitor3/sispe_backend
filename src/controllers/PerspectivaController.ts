@@ -70,7 +70,6 @@ class PerspectivaController {
     const perspectivaFull = await resourcePerspectivaRepository.findOne({
       where: {id:id},
     });
-
     if(!perspectivaFull){
       return response.status(400).json({status: "perspectiva não encontrado"})
     }
@@ -84,7 +83,6 @@ class PerspectivaController {
     });
 
     return response.status(200).json(perspectiva);
-
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {
@@ -100,7 +98,6 @@ class PerspectivaController {
     if (!deleteResponse.affected) {
       return response.status(400).json({status: "cartão não excluido!"});
     }
-
     return response.json(perspectivaToRemove);
   }
 
