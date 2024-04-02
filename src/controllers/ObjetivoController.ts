@@ -20,7 +20,6 @@ class ObjetivoController {
     } catch (err) {
       return response.status(400).json({status: "Erro de validação dos campos!"});
     }
-
     const resourceObjetivoRepository = APPDataSource.getRepository(Objetivo);
 
     const objetivo = resourceObjetivoRepository.create({
@@ -86,7 +85,6 @@ class ObjetivoController {
     });
 
     return response.status(200).json(objetivo);
-
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {
@@ -121,7 +119,6 @@ class ObjetivoController {
     return response.json(all);
   }
   
-
   async token(request: Request, response: Response, next: NextFunction) {
     const id = 1;
     const token = jwt.sign({ id }, process.env.SECRET, {
@@ -130,7 +127,6 @@ class ObjetivoController {
 
     return response.json({ auth: true, token });
   }
-
 }
 
 export { ObjetivoController };
