@@ -4,6 +4,7 @@ import { Perspectiva } from './Perspectiva';
 import { Estrategia } from './Estrategia';
 import { Etapa } from './Etapa';
 import { Responsavel } from './Responsavel';
+import { Meta } from './Meta';
 
 
 @Entity("acao") 
@@ -47,15 +48,14 @@ export class Acao {
   terminoReal: Date;
 
 
-  @OneToMany((type) => Etapa, (etapa) => etapa.acao, {nullable: true})
+  @OneToMany((type) => Etapa, (etapa) => etapa.acao, {nullable: true, eager: true})
   etapa: Etapa;
   
-  @OneToMany((type) => Responsavel, (responsavel) => responsavel.acao, {nullable: true})
+  @OneToMany((type) => Responsavel, (responsavel) => responsavel.acao, {nullable: true, eager: true})
   responsavel: Responsavel;
   
-
-  @ManyToOne((type) => Estrategia, (estrategia) => estrategia.iniciativa, {nullable: false, eager: true})
-  estrategia: Estrategia;
+  @ManyToOne((type) => Meta, (meta) => meta.iniciativa, {nullable: false})
+  meta: Meta;
 
   @DeleteDateColumn()
   deleted_at: Date; 

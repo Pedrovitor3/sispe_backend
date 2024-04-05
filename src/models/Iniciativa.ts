@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, JoinTab
 import { v4 as uuid } from 'uuid';
 import { Perspectiva } from './Perspectiva';
 import { Estrategia } from './Estrategia';
+import { Meta } from './Meta';
 
 
 @Entity("iniciativa") 
@@ -22,7 +23,10 @@ export class Iniciativa {
   @Column()
   percentualExecutado: number;
 
-  @ManyToOne((type) => Estrategia, (estrategia) => estrategia.iniciativa, {nullable: false})
+  @OneToMany((type) => Meta, (meta) => meta.iniciativa, {nullable: true, eager: true})
+  meta: Meta;
+
+  @ManyToOne((type) => Estrategia, (estrategia) => estrategia.iniciativa, {nullable: false, eager: true})
   estrategia: Estrategia;
 
   @DeleteDateColumn()

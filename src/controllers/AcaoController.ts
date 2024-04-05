@@ -12,7 +12,7 @@ class AcaoController {
     const { 
       name, ano, percentualExecutado, status, departamentoResponsavel, justificativa, observacao, entraves,  
       inicioPrevisto, terminoPrevisto, inicioReal, terminoReal,
-      estrategia
+      meta
     } = request.body;
 
 
@@ -52,7 +52,7 @@ class AcaoController {
       terminoPrevisto, 
       inicioReal, 
       terminoReal,
-      estrategia
+      meta,
     });
 
     await resourceAcaoRepository.save(acao);
@@ -82,7 +82,7 @@ class AcaoController {
     const { 
       name, ano, percentualExecutado, status, departamentoResponsavel, justificativa, observacao, entraves,  
       inicioPrevisto, terminoPrevisto, inicioReal, terminoReal,
-      estrategia
+      meta
     } = request.body;
     const id = request.params.id;
 
@@ -135,7 +135,7 @@ class AcaoController {
       terminoPrevisto, 
       inicioReal, 
       terminoReal,
-      estrategia
+      meta,
     });
 
     return response.status(200).json(acao);

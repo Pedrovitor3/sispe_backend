@@ -18,12 +18,6 @@ export class Estrategia {
 
   @OneToMany((type) => Iniciativa, (iniciativa) => iniciativa.estrategia, {nullable: true})
   iniciativa: Iniciativa;
-  
-  @OneToMany((type) => Meta, (meta) => meta.estrategia, {nullable: true})
-  meta: Meta;
-  
-  @OneToMany((type) => Acao, (acao) => acao.estrategia, {nullable: true})
-  acao: Acao;
 
   @ManyToOne((type) => Objetivo, (objetivo) => objetivo.estrategia, {nullable: false, eager: true})
   objetivo: Objetivo;

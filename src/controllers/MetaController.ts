@@ -9,7 +9,7 @@ class MetaController {
   
   async create(request: Request, response: Response, next: NextFunction) {
     
-    const { name, estrategia } = request.body;
+    const { name, iniciativa } = request.body;
 
     const schema = yup.object().shape({
       name: yup.string().required(),
@@ -25,7 +25,7 @@ class MetaController {
 
     const meta = resourceMetaRepository.create({
       name,
-      estrategia,
+      iniciativa,
     });
 
     await resourceMetaRepository.save(meta);
@@ -52,7 +52,7 @@ class MetaController {
   }
 
   async update(request: Request, response: Response, next: NextFunction) {
-    const { name, estrategia } = request.body;
+    const { name, iniciativa } = request.body;
     const id = request.params.id;
 
     const schema = yup.object().shape({
@@ -81,7 +81,7 @@ class MetaController {
       id
     }, {
       name,
-      estrategia,
+      iniciativa,
     });
 
     return response.status(200).json(meta);

@@ -2,6 +2,8 @@ import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, JoinTab
 import { v4 as uuid } from 'uuid';
 import { Perspectiva } from './Perspectiva';
 import { Estrategia } from './Estrategia';
+import { Acao } from './Acao';
+import { Iniciativa } from './Iniciativa';
 
 
 @Entity("meta") 
@@ -13,8 +15,11 @@ export class Meta {
   @Column()
   name: string;
 
-  @ManyToOne((type) => Estrategia, (estrategia) => estrategia.meta, {nullable: false})
-  estrategia: Estrategia;
+  @OneToMany((type) => Acao, (acao) => acao.meta, {nullable: true, eager: true})
+  acao: Acao;
+
+  @ManyToOne((type) => Iniciativa, (iniciativa) => iniciativa.meta, {nullable: false})
+  iniciativa: Iniciativa;
 
   @DeleteDateColumn()
   deleted_at: Date; 
