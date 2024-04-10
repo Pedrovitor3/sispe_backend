@@ -23,7 +23,7 @@ export class Iniciativa {
   @Column()
   percentualExecutado: number;
 
-  @OneToMany((type) => Meta, (meta) => meta.iniciativa, {nullable: true, eager: true})
+  @OneToMany((type) => Meta, (meta) => meta.iniciativa, {nullable: true})
   meta: Meta;
 
   @ManyToOne((type) => Estrategia, (estrategia) => estrategia.iniciativa, {nullable: false, eager: true})

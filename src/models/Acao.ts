@@ -49,12 +49,12 @@ export class Acao {
 
 
   @OneToMany((type) => Etapa, (etapa) => etapa.acao, {nullable: true, eager: true})
-  etapa: Etapa;
+  etapa: Etapa[];
   
-  @OneToMany((type) => Responsavel, (responsavel) => responsavel.acao, {nullable: true, eager: true})
-  responsavel: Responsavel;
+  @OneToMany((type) => Responsavel, (responsavel) => responsavel.acao, {nullable: true})
+  responsavel: Responsavel[];
   
-  @ManyToOne((type) => Meta, (meta) => meta.iniciativa, {nullable: false})
+  @ManyToOne((type) => Meta, (meta) => meta.acao, {nullable: false})
   meta: Meta;
 
   @DeleteDateColumn()

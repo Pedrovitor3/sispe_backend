@@ -15,10 +15,10 @@ export class Meta {
   @Column()
   name: string;
 
-  @OneToMany((type) => Acao, (acao) => acao.meta, {nullable: true, eager: true})
+  @OneToMany((type) => Acao, (acao) => acao.meta, {nullable: true})
   acao: Acao;
 
-  @ManyToOne((type) => Iniciativa, (iniciativa) => iniciativa.meta, {nullable: false})
+  @ManyToOne((type) => Iniciativa, (iniciativa) => iniciativa.meta, {nullable: false, eager: true})
   iniciativa: Iniciativa;
 
   @DeleteDateColumn()
