@@ -9,7 +9,7 @@ class PerspectivaController {
   
   async create(request: Request, response: Response, next: NextFunction) {
     
-    const { name } = request.body;
+    const { name,position } = request.body;
 
     const schema = yup.object().shape({
       name: yup.string().required(),
@@ -25,6 +25,7 @@ class PerspectivaController {
 
     const perspectiva = resourcePerspectivaRepository.create({
       name,
+      position,
     });
 
     await resourcePerspectivaRepository.save(perspectiva);
@@ -51,7 +52,7 @@ class PerspectivaController {
   }
 
   async update(request: Request, response: Response, next: NextFunction) {
-    const { name } = request.body;
+    const { name, position } = request.body;
     const id = request.params.id;
 
     const schema = yup.object().shape({
@@ -80,6 +81,7 @@ class PerspectivaController {
       id
     }, {
       name,
+      position,
     });
 
     return response.status(200).json(perspectiva);

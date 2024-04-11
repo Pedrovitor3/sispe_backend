@@ -12,6 +12,9 @@ export class Perspectiva {
   @Column()
   name: string;
 
+  @Column({nullable: true})
+  position: number;
+
   @OneToMany((type) => Objetivo, (objetivo) => objetivo.perspectiva, {nullable: true})
   objetivo: Objetivo;
 
