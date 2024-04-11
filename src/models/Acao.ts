@@ -54,7 +54,7 @@ export class Acao {
   @OneToMany((type) => Responsavel, (responsavel) => responsavel.acao, {nullable: true})
   responsavel: Responsavel[];
   
-  @ManyToOne((type) => Meta, (meta) => meta.acao, {nullable: false})
+  @ManyToOne((type) => Meta, (meta) => meta.acao, {nullable: false, eager: true})
   meta: Meta;
 
   @DeleteDateColumn()
