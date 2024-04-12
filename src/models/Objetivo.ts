@@ -12,6 +12,9 @@ export class Objetivo {
   
   @Column()
   name: string;
+  
+  @Column({nullable: true})
+  position: number;
 
   @OneToMany((type) => Estrategia, (estrategia) => estrategia.objetivo, {nullable: true})
   estrategia: Estrategia;

@@ -9,7 +9,7 @@ class ObjetivoController {
   
   async create(request: Request, response: Response, next: NextFunction) {
     
-    const { name, perspectiva } = request.body;
+    const { name, perspectiva, position } = request.body;
 
     const schema = yup.object().shape({
       name: yup.string().required(),
@@ -25,6 +25,7 @@ class ObjetivoController {
     const objetivo = resourceObjetivoRepository.create({
       name,
       perspectiva,
+      position,
     });
 
     await resourceObjetivoRepository.save(objetivo);
@@ -51,7 +52,7 @@ class ObjetivoController {
   }
 
   async update(request: Request, response: Response, next: NextFunction) {
-    const { name, perspectiva } = request.body;
+    const { name, perspectiva, position } = request.body;
     const id = request.params.id;
 
     const schema = yup.object().shape({
@@ -82,6 +83,7 @@ class ObjetivoController {
     }, {
       name,
       perspectiva,
+      position,
     });
 
     return response.status(200).json(objetivo);
