@@ -17,7 +17,7 @@ export class Acao {
   name: string;
 
   @Column({nullable: true})
-  ano: Date;
+  ano: string;
   
   @Column()
   status: string;
