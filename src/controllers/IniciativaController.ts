@@ -13,7 +13,6 @@ class IniciativaController {
 
     const schema = yup.object().shape({
       name: yup.string().required(),
-      percentualExecutado: yup.number().required(),
       status: yup.string().required(),    
       item: yup.string().required(),    
     });
@@ -63,7 +62,6 @@ class IniciativaController {
 
     const schema = yup.object().shape({
       name: yup.string().required(),
-      percentualExecutado: yup.number().required(),
       status: yup.string().required(),
       item: yup.string().required(),    
     });

@@ -19,33 +19,33 @@ export class Acao {
   @Column({nullable: true})
   ano: string;
   
-  @Column()
+  @Column({nullable: true})
   status: string;
 
-  @Column()
-  percentualExecutado: number;
+  @Column({nullable: true})
+  percentualExecutado: string;
 
-  @Column()
+  @Column({nullable: true})
   departamentoResponsavel: string;
 
-  @Column()
+  @Column({nullable: true})
   justificativa: string;
 
-  @Column()
+  @Column({nullable: true})
   observacao: string;
 
-  @Column()
+  @Column({nullable: true})
   entraves: string;
 
   @Column({nullable: true})
-  inicioPrevisto: Date;
+  inicioPrevisto: string;
   @Column({nullable: true})
-  terminoPrevisto: Date;
+  terminoPrevisto: string;
 
   @Column({nullable: true})
-  inicioReal: Date;
+  inicioReal: string;
   @Column({nullable: true})
-  terminoReal: Date;
+  terminoReal: string;
 
 
   @OneToMany((type) => Etapa, (etapa) => etapa.acao, {nullable: true, eager: true})

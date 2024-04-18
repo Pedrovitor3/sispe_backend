@@ -15,28 +15,6 @@ class AcaoController {
       meta
     } = request.body;
 
-
-    const schema = yup.object().shape({
-      name: yup.string().required(),
-      percentualExecutado: yup.number().required(),
-      status: yup.string().required(),
-      departamentoResponsavel: yup.string().required(),
-      justificativa: yup.string().required(),
-      observacao: yup.string().required(),
-      entraves: yup.string().required(),
-
-      inicioPrevisto: yup.date(),
-      terminoPrevisto: yup.date(),
-      inicioReal: yup.date(),
-      terminoReal: yup.date(),
-    });
-
-    try {
-      await schema.validate(request.body, { abortEarly: false });
-    } catch (err) {
-      return response.status(400).json({status: "Erro de validação dos campos!"});
-    }
-
     const resourceAcaoRepository = APPDataSource.getRepository(Acao);
 
     const acao = resourceAcaoRepository.create({
@@ -85,27 +63,6 @@ class AcaoController {
       meta
     } = request.body;
     const id = request.params.id;
-
-    const schema = yup.object().shape({
-      name: yup.string().required(),
-      percentualExecutado: yup.number().required(),
-      status: yup.string().required(),
-      departamentoResponsavel: yup.string().required(),
-      justificativa: yup.string().required(),
-      observacao: yup.string().required(),
-      entraves: yup.string().required(),
-
-      inicioPrevisto: yup.date(),
-      terminoPrevisto: yup.date(),
-      inicioReal: yup.date(),
-      terminoReal: yup.date(),
-    });
-
-    try {
-      await schema.validate(request.body, { abortEarly: false });
-    } catch (err) {
-      return response.status(400).json({status: "Erro de validação dos campos!"});
-    }
 
     const resourceAcaoRepository = APPDataSource.getRepository(Acao);
 

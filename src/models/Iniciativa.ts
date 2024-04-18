@@ -14,14 +14,14 @@ export class Iniciativa {
   @Column()
   name: string;
 
-  @Column()
+  @Column({nullable: true})
   item: string;
   
-  @Column()
+  @Column({nullable: true})
   status: string;
 
-  @Column()
-  percentualExecutado: number;
+  @Column({nullable: true})
+  percentualExecutado: string;
 
   @OneToMany((type) => Meta, (meta) => meta.iniciativa, {nullable: true})
   meta: Meta;
