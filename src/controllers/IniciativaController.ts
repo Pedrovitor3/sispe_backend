@@ -13,8 +13,8 @@ class IniciativaController {
 
     const schema = yup.object().shape({
       name: yup.string().required(),
-      status: yup.string().required(),    
-      item: yup.string().required(),    
+      status: yup.string(),    
+      item: yup.string(),    
     });
 
     try {
@@ -62,8 +62,8 @@ class IniciativaController {
 
     const schema = yup.object().shape({
       name: yup.string().required(),
-      status: yup.string().required(),
-      item: yup.string().required(),    
+      status: yup.string(),
+      item: yup.string(),    
     });
 
     try {
