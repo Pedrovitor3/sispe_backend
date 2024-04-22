@@ -15,10 +15,12 @@ export class Responsavel {
   name: string;
 
   @Column()
-  cargo: string;
+  cargo: string; 
 
-  @ManyToOne((type) => Acao, (acao) => acao.responsavel, {nullable: false})
-  acao: Acao;
+  @ManyToMany(() => Acao, acao => acao.responsaveis, { nullable: true})
+  @JoinTable()
+  acoes: Acao[];
+  
 
   @DeleteDateColumn()
   deleted_at: Date; 
@@ -28,9 +30,6 @@ export class Responsavel {
 
   @UpdateDateColumn() 
   update_at: Date;
-
-
-
 
 
   /*

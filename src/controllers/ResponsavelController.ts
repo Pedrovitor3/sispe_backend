@@ -9,7 +9,7 @@ class ResponsavelController {
   
   async create(request: Request, response: Response, next: NextFunction) {
     
-    const { name, cargo, acao } = request.body;
+    const { name, cargo } = request.body;
 
     const schema = yup.object().shape({
       name: yup.string().required(),
@@ -27,7 +27,6 @@ class ResponsavelController {
     const responsavel = resourceResponsavelRepository.create({
       name,
       cargo,
-      acao,
     });
 
     await resourceResponsavelRepository.save(responsavel);
@@ -54,7 +53,7 @@ class ResponsavelController {
   }
 
   async update(request: Request, response: Response, next: NextFunction) {
-    const { name, cargo, acao } = request.body;
+    const { name, cargo } = request.body;
 
     const id = request.params.id;
 
@@ -87,7 +86,6 @@ class ResponsavelController {
     }, {
       name,
       cargo,
-      acao,
     });
 
     return response.status(200).json(responsavel);

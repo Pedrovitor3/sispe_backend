@@ -12,7 +12,7 @@ class AcaoController {
     const { 
       name, ano, percentualExecutado, status, departamentoResponsavel, justificativa, observacao, entraves,  
       inicioPrevisto, terminoPrevisto, inicioReal, terminoReal,
-      meta
+      meta, responsaveis
     } = request.body;
 
     const resourceAcaoRepository = APPDataSource.getRepository(Acao);
@@ -31,6 +31,7 @@ class AcaoController {
       inicioReal, 
       terminoReal,
       meta,
+      responsaveis,
     });
 
     await resourceAcaoRepository.save(acao);
@@ -60,43 +61,47 @@ class AcaoController {
     const { 
       name, ano, percentualExecutado, status, departamentoResponsavel, justificativa, observacao, entraves,  
       inicioPrevisto, terminoPrevisto, inicioReal, terminoReal,
-      meta
+      meta, responsaveis
     } = request.body;
+
     const id = request.params.id;
 
     const resourceAcaoRepository = APPDataSource.getRepository(Acao);
 
-
-    const acaoFull = await resourceAcaoRepository.findOne({
-      where: {id:id},
+    // Encontre a ação que você deseja atualizar
+    const acaoToUpdate = await resourceAcaoRepository.findOne({
+      where: { id: id },
+      relations: ['responsaveis'] // Certifique-se de carregar os responsáveis
     });
 
-    if(!acaoFull){
-      return response.status(400).json({status: "acao não encontrado"})
+    if (!acaoToUpdate) {
+      return response.status(404).json({ error: 'Acao not found' });
     }
 
-    await resourceAcaoRepository.save(acaoFull);
+    // Atualize os campos da ação
+    acaoToUpdate.name = name;
+    acaoToUpdate.ano = ano;
+    acaoToUpdate.percentualExecutado = percentualExecutado;
+    acaoToUpdate.status = status;
+    acaoToUpdate.departamentoResponsavel = departamentoResponsavel;
+    acaoToUpdate.justificativa = justificativa;
+    acaoToUpdate.observacao = observacao;
+    acaoToUpdate.entraves = entraves;
+    acaoToUpdate.inicioPrevisto = inicioPrevisto;
+    acaoToUpdate.terminoPrevisto = terminoPrevisto;
+    acaoToUpdate.inicioReal = inicioReal;
+    acaoToUpdate.terminoReal = terminoReal;
+    acaoToUpdate.meta = meta;
 
-    const acao = await resourceAcaoRepository.update({
-      id
-    }, {
-      name, 
-      ano,
-      percentualExecutado,
-      status,
-      departamentoResponsavel, 
-      justificativa, 
-      observacao, 
-      entraves,  
-      inicioPrevisto, 
-      terminoPrevisto, 
-      inicioReal, 
-      terminoReal,
-      meta,
-    });
+    // Atualize manualmente a relação muitos-para-muitos (responsáveis)
+    acaoToUpdate.responsaveis = responsaveis; // Certifique-se de que responsaveis seja uma matriz de objetos de entidade válidos
 
-    return response.status(200).json(acao);
-  }
+    // Salve as alterações na ação
+    const updatedAcao = await resourceAcaoRepository.save(acaoToUpdate);
+
+    return response.status(200).json(updatedAcao);
+}
+
 
   async remove(request: Request, response: Response, next: NextFunction) {
     const resourceAcaoRepository = APPDataSource.getRepository(Acao);
