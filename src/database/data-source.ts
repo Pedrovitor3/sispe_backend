@@ -8,6 +8,7 @@ import { Meta } from '../models/Meta';
 import { Acao } from '../models/Acao';
 import { Responsavel } from '../models/Responsavel';
 import { Etapa } from '../models/Etapa';
+import { Andamento } from '../models/Andamento';
 require('dotenv').config();
 
 //import { CreateUsuarios1656685284937 } from '../database/migrations/1656685284937-CreateUsuarios';
@@ -21,7 +22,7 @@ export const APPDataSource = new DataSource({
   database: process.env.DB_DATABASE,
   synchronize: true,
   logging: false,
-  entities: [Perspectiva, Objetivo, Estrategia, Iniciativa, Meta, Acao, Responsavel, Etapa],
+  entities: [Perspectiva, Objetivo, Estrategia, Iniciativa, Meta, Acao, Responsavel, Etapa, Andamento],
   //  migrations: [CreateUsuarios1656685284937],
   subscribers: [],
 });

@@ -9,6 +9,7 @@ import { MetaController } from './controllers/MetaController';
 import { AcaoController } from './controllers/AcaoController';
 import { ResponsavelController } from './controllers/ResponsavelController';
 import { EtapaController } from './controllers/EtapaController';
+import { AndamentoController } from './controllers/AndamentoController';
 
 
 const router = Router();
@@ -21,7 +22,7 @@ const metaController = new MetaController();
 const acaoController = new AcaoController();
 const responsavelController = new ResponsavelController();
 const etapaController = new EtapaController();
-
+const andamentoController = new AndamentoController();
 //Perspectiva
 router.post("/perspectiva", verifyToken, perspectivaController.create);
 router.get("/perspectiva", verifyToken, perspectivaController.all);
@@ -78,5 +79,13 @@ router.get("/etapa", verifyToken, etapaController.all);
 router.get("/etapa/:id", verifyToken, etapaController.one);
 router.put("/etapa/:id", verifyToken, etapaController.update);
 router.delete("/etapa/:id", verifyToken, etapaController.remove);
+
+//Andamento
+router.post("/andamento", verifyToken, andamentoController.create);
+router.get("/andamento", verifyToken, andamentoController.all);
+router.get("/andamento/:id", verifyToken, andamentoController.one);
+router.put("/andamento/:id", verifyToken, andamentoController.update);
+router.delete("/andamento/:id", verifyToken, andamentoController.remove);
+
 
 export { router }; // Retornando as rotas preenchidas para o server.ts

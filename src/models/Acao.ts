@@ -48,18 +48,15 @@ export class Acao {
   terminoReal: string;
 
 
-  @OneToMany((type) => Etapa, (etapa) => etapa.acao, {nullable: true, eager: true})
+  @OneToMany((type) => Etapa, (etapa) => etapa.acao, {nullable: true})
   etapa: Etapa[];
   
- 
   @ManyToOne((type) => Meta, (meta) => meta.acao, {nullable: false, eager: true})
   meta: Meta;
   
   @ManyToMany(() => Responsavel, responsavel => responsavel.acoes, { nullable: true, eager: true })
   @JoinTable()
   responsaveis: Responsavel[];
-
-
 
   @DeleteDateColumn()
   deleted_at: Date; 

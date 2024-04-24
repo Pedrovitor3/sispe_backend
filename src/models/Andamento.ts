@@ -3,11 +3,11 @@ import { v4 as uuid } from 'uuid';
 import { Perspectiva } from './Perspectiva';
 import { Estrategia } from './Estrategia';
 import { Acao } from './Acao';
-import { Andamento } from './Andamento';
+import { Etapa } from './Etapa';
 
 
-@Entity("etapa") 
-export class Etapa {
+@Entity("andamento") 
+export class Andamento {
 
   @PrimaryColumn()
   readonly id: string; 
@@ -16,16 +16,12 @@ export class Etapa {
   name: string;
 
   @Column({nullable: true})
-  percentualConclusao: string;
-
-  @Column({nullable: true})
   position: number;
 
-  @ManyToOne((type) => Acao, (acao) => acao.etapa, {nullable: false, eager: true})
-  acao: Acao;
-
-  @ManyToOne((type) => Andamento, (andamento) => andamento.etapa, {nullable: true, eager: true})
-  andamento: Andamento;
+  
+  @OneToMany((type) => Etapa, (etapa) => etapa.andamento, {nullable: true})
+  etapa: Etapa[];
+  
 
   @DeleteDateColumn()
   deleted_at: Date; 

@@ -2,14 +2,14 @@ import { NextFunction, Request, Response } from 'express';
 import * as yup from 'yup';
 import { APPDataSource } from '../database/data-source';
 import jwt from 'jsonwebtoken';
-import { Etapa } from '../models/Etapa';
+import { Andamento } from '../models/Andamento';
 
 
-class EtapaController {
+class AndamentoController {
   
   async create(request: Request, response: Response, next: NextFunction) {
     
-    const { name, percentualConclusao, andamento, acao, position } = request.body;
+    const { name,position } = request.body;
 
     const schema = yup.object().shape({
       name: yup.string().required(),
@@ -21,41 +21,38 @@ class EtapaController {
       return response.status(400).json({status: "Erro de validação dos campos!"});
     }
 
-    const resourceEtapaRepository = APPDataSource.getRepository(Etapa);
+    const resourceAndamentoRepository = APPDataSource.getRepository(Andamento);
 
-    const etapa = resourceEtapaRepository.create({
-      name, 
-      percentualConclusao, 
-      andamento,
-      acao,
+    const  andamento = resourceAndamentoRepository.create({
+      name,
       position,
     });
 
-    await resourceEtapaRepository.save(etapa);
+    await resourceAndamentoRepository.save(andamento);
 
-    return response.status(201).json(etapa);
+    return response.status(201).json(andamento);
   }
 
   async all(request: Request, response: Response, next: NextFunction) {
-    const resourceEtapaRepository = APPDataSource.getRepository(Etapa);
+    const resourceAndamentoRepository = APPDataSource.getRepository(Andamento);
 
-    const all = await resourceEtapaRepository.find();
+    const all = await resourceAndamentoRepository.find();
 
     return response.json(all);
   }
 
   async one(request: Request, response: Response, next: NextFunction) {
-    const resourceEtapaRepository = APPDataSource.getRepository(Etapa);
+    const resourceAndamentoRepository = APPDataSource.getRepository(Andamento);
     
     const { id } = request.params;
 
-    const one = await resourceEtapaRepository.findOne({ where: { id: id }});
+    const one = await resourceAndamentoRepository.findOne({ where: { id: id }});
 
     return response.json(one);
   }
 
   async update(request: Request, response: Response, next: NextFunction) {
-    const { name, percentualConclusao, andamento, acao } = request.body;
+    const { name, position } = request.body;
     const id = request.params.id;
 
     const schema = yup.object().shape({
@@ -68,53 +65,51 @@ class EtapaController {
       return response.status(400).json({status: "Erro de validação dos campos!"});
     }
 
-    const resourceEtapaRepository = APPDataSource.getRepository(Etapa);
+    const resourceAndamentoRepository = APPDataSource.getRepository(Andamento);
 
-    const etapaFull = await resourceEtapaRepository.findOne({
+
+    const andamentoFull = await resourceAndamentoRepository.findOne({
       where: {id:id},
     });
-
-    if(!etapaFull){
-      return response.status(400).json({status: "etapa não encontrado"})
+    if(!andamentoFull){
+      return response.status(400).json({status: "andamento não encontrado"})
     }
 
-    await resourceEtapaRepository.save(etapaFull);
+    await resourceAndamentoRepository.save(andamentoFull);
 
-    const etapa = await resourceEtapaRepository.update({
+    const andamento = await resourceAndamentoRepository.update({
       id
     }, {
-      name, 
-      percentualConclusao, 
-      andamento,
-      acao,
+      name,
+      position,
     });
 
-    return response.status(200).json(etapa);
+    return response.status(200).json(andamento);
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {
-    const resourceEtapaRepository = APPDataSource.getRepository(Etapa);
+    const resourceAndamentoRepository = APPDataSource.getRepository(Andamento);
 
-    let etapaToRemove = await resourceEtapaRepository.findOneBy({ id: request.params.id });
+    let andamentoToRemove = await resourceAndamentoRepository.findOneBy({ id: request.params.id });
 
-    if (!etapaToRemove) {
+    if (!andamentoToRemove) {
       return response.status(400).json({status: "cartão não encontrado!"});
     }
       
-    const deleteResponse = await resourceEtapaRepository.softDelete(etapaToRemove.id);
+    const deleteResponse = await resourceAndamentoRepository.softDelete(andamentoToRemove.id);
     if (!deleteResponse.affected) {
       return response.status(400).json({status: "cartão não excluido!"});
     }
-    return response.json(etapaToRemove);
+    return response.json(andamentoToRemove);
   }
 
   async paginar(request: Request, response: Response, next: NextFunction) {
-    const resourceEtapaRepository = APPDataSource.getRepository(Etapa);
+    const resourceAndamentoRepository = APPDataSource.getRepository(Andamento);
 
     const { perPage, page, column } = request.query;
     const skip = parseInt(page.toString()) * parseInt(perPage.toString());
 
-    const all = await resourceEtapaRepository.createQueryBuilder( 'etapa' )
+    const all = await resourceAndamentoRepository.createQueryBuilder( 'andamento' )
       .take( parseInt(perPage.toString()) )
       .skip( skip )
       .addOrderBy( column.toString(), 'ASC' )
@@ -133,4 +128,4 @@ class EtapaController {
   }
 }
 
-export { EtapaController };
+export { AndamentoController };
