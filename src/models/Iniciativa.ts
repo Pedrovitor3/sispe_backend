@@ -15,7 +15,7 @@ export class Iniciativa {
   name: string;
 
   @Column({nullable: true})
-  item: string;
+  item: number;
   
   @Column({nullable: true})
   status: string;
